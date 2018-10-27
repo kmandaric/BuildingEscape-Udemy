@@ -44,10 +44,10 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	//Poll the Trigger Volume every frame
-	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
+	if (PressurePlate->IsOverlappingActor(ActorThatOpens)) // if the ActorThatOpens is in the volume
 	{
 		OpenDoor();
 	}
-		// if the ActorThatOpens is in the volume
+		
 }
 
