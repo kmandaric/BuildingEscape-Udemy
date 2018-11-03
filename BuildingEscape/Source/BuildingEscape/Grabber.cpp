@@ -1,9 +1,9 @@
 // Copyright Kristian Mandaric 2018
-
-#include "BuildingEscape.h"
 #include "Grabber.h"
+#include "BuildingEscape.h"
 #include "Components/ActorComponent.h"
 #include "Engine/World.h"
+#include "DrawDebugHelpers.h"
 
 #define OUT
 
@@ -24,7 +24,7 @@ void UGrabber::BeginPlay()
 	Super::BeginPlay();
 
 	UE_LOG(LogTemp, Warning, TEXT("Grabber reporting for duty!"));
-	
+
 }
 
 
@@ -37,21 +37,34 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotation;
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
-		OUT PlayerViewPointLocation, 
+		OUT PlayerViewPointLocation,
 		OUT PlayerViewPointRotation
 	);
 
 	//Log out to every tick
 	//FString PlayerLookLocation = GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation,OUT PlayerViewPointRotation).ToString();
 	//FString PlayerLookRotation;
-	
-	UE_LOG(LogTemp, Warning, TEXT("Location: %s, Rotation: %s"),
+
+	/*UE_LOG(LogTemp, Warning, TEXT("Location: %s, Rotation: %s"),
 		*PlayerViewPointLocation.ToString(),
 		*PlayerViewPointRotation.ToString()
-	)
+	)*/
 
-	// Ray-cast out to reach distance
+	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
 
-	// See what we hit
+	DrawDebugLine(
+		GetWorld(),
+		PlayerViewPointLocation,
+		LineTraceEnd,
+		FColor(255, 0, 0),
+		false,
+		0.f,
+		0.f,
+		10.f
+	);
+
+		// Ray-cast out to reach distance
+
+		// See what we hit
 }
 
