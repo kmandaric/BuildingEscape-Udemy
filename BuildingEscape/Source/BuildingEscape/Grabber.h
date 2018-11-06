@@ -48,6 +48,5 @@ private:
 	FVector GetReachLineStart()const;
 	//Returns current end of reach line
 	FVector GetReachLineEnd()const;
-	
 
 };
